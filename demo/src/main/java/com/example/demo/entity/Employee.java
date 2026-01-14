@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +15,6 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "employees")
-@JsonIgnoreType
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +24,12 @@ public class Employee {
     private String emp_name;
 
     @ManyToOne
-    @JoinColumn(name = "dept_id")
+    @JoinColumn(name = "dept_id", insertable = false, updatable = false)
+    @JsonBackReference
     private Department department;
+
+    @Column(name = "dept_id")
+    private Long dept_id;
 
     private Double salary;
     

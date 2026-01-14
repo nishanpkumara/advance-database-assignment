@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,5 +24,6 @@ public class Department {
     private String dept_name;
 
     @OneToMany(mappedBy = "department")
+    @JsonManagedReference
     private List<Employee> employees;
 }
